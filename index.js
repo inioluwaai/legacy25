@@ -12,29 +12,46 @@ function clearOutput() {
     
 }
 
-function quiz(){
-    Questions = ["what is the capital of France?", "what is 2+2?", "what is the capital of Japan?"];
-    Answers = ["Paris", "4", "Tokyo"];
-    Score = 0;
-    for (let i = 0; i < Questions.length; i++) {
-        let userAnswer = prompt(Questions[i]);
-        if (userAnswer === ""){
-            alert("Please answer the question.");
-            i--; 
-            continue; 
+//excercise 2
+    function quiz() {
+      // Define question-answer pairs as objects
+      const QA = [
+        { q: "What is the capital of France?", a: "Paris" },
+        { q: "What is 2 + 2?", a: "4" },
+        { q: "What is the capital of Japan?", a: "Tokyo" },
+        { q: "What is the largest planet in our solar system?", a: "Jupiter" },
+        { q: "Who wrote 'Hamlet'?", a: "Shakespeare" },
+        { q: "What is the boiling point of water (in °C)?", a: "100" },
+        { q: "What is the chemical symbol for gold?", a: "Au" },
+        { q: "What year did World War II end?", a: "1945" }
+      ];
+
+      // Shuffle the questions
+      const shuffled = QA.sort(() => Math.random() - 0.5);
+
+      let score = 0;
+
+      for (let i = 0; i < shuffled.length; i++) {
+        let userAnswer = prompt(shuffled[i].q);
+
+        if (userAnswer === null || userAnswer.trim() === "") {
+          alert("Please answer the question.");
+          i--;
+          continue;
         }
-        if (userAnswer.toLowerCase() === Answers[i].toLowerCase()) {
-            Score++;
-            alert("Correct!");
+
+        if (userAnswer.trim().toLowerCase() === shuffled[i].a.toLowerCase()) {
+          score++;
+          alert("Correct!");
         } else {
-            alert("Incorrect! The correct answer is " + Answers[i]);
+          alert(`Incorrect! The correct answer is ${shuffled[i].a}`);
         }
+      }
+
+      const result = document.getElementById("excercise1Output");
+      result.innerHTML = `🎉 Your score is: ${score}/${shuffled.length}`;
     }
-    result = document.getElementById("excercise1Output");
-    result.innerHTML = "Your score is: " + Score + "/" + Questions.length;
-}
-
-
+  
 
 //Excercise two Solution
 function clearOutput2() {
